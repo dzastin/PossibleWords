@@ -20,8 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Button"
-        tools:layout_editor_absoluteX="193dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:onClick="findWords"
+        android:text="find words"
+        tools:layout_editor_absoluteX="139dp"
+        tools:layout_editor_absoluteY="53dp" />
 
 </android.support.constraint.ConstraintLayout>

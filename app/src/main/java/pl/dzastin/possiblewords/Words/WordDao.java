@@ -3,6 +3,7 @@ package pl.dzastin.possiblewords.Words;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
 
+
 import java.util.List;
 
 
