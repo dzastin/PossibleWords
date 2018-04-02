@@ -2,6 +2,7 @@ package pl.dzastin.possiblewords;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import java.util.List;
@@ -14,8 +15,6 @@ import pl.dzastin.possiblewords.Words.Word;
 
 public class FindWordsActivity extends AppCompatActivity {
 
-    public AppDatabaseHelper appDbHelper = new AppDatabaseHelper();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +25,8 @@ public class FindWordsActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<Word> words = appDbHelper.getInstance(getApplicationContext()).wordDao().getAllInLength(10);
+                List<Word> words = AppDatabase.getInstance(getApplicationContext()).wordDao().getAllInLength(10);
+                Log.i("LOG", "got words");
             }
         }).start();
 
