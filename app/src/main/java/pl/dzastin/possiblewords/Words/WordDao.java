@@ -19,7 +19,7 @@ public interface WordDao {
     List<Word> getAllInLength(int length);
 
     @Insert
-    void insertAll(Word... words);
+    void insertAll(List<Word> words);
 
 //    @Query("select * from word where ")
 //    List<Word> getAllWithLetters(Character[] letters);

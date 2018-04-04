@@ -25,8 +25,8 @@ public class FindWordsActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<Word> words = AppDatabase.getInstance(getApplicationContext()).wordDao().getAllInLength(10);
-                Log.i("LOG", "got words");
+                List<Word> words = AppDatabase.getInstance(getApplicationContext()).wordDao().getAllInLength(4);
+                Log.i("LOG", "got words ".concat(words.get(0).getName()));
             }
         }).start();
 

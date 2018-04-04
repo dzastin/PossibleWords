@@ -12,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Justyn on 2018-04-01.
@@ -42,20 +44,24 @@ public class Word {
         this.length = length;
     }
 
-    public static Word[] populateData(Context context) {
-        Word[] words = new Word[]{};
+    public static List<Word> populateData(Context context) {
+        List<Word> words = new ArrayList<Word>();
 
         try {
             BufferedReader reader;
             Resources resources = context.getResources();
 
             InputStream file = resources.openRawResource(
-                    resources.getIdentifier("words.txt",
+                    resources.getIdentifier("words",
                             "raw", context.getPackageName()));
             reader = new BufferedReader(new InputStreamReader(file));
             String line = reader.readLine();
             while(line != null){
                 Log.d("word", line);
+                Word newWord = new Word();
+                newWord.setName(line);
+                newWord.setLength(line.length());
+                words.add(newWord);
                 line = reader.readLine();
             }
         } catch (IOException ioe){
