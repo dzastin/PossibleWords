@@ -1,9 +1,15 @@
 package pl.dzastin.possiblewords;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -21,12 +27,30 @@ public class FindWordsActivity extends AppCompatActivity {
         setContentView(R.layout.find_words);
     }
 
-    public void getWords(View view) {
+    public void getWords(final View view) {
+        final TextView results = findViewById(R.id.results);
+        results.setText(" ");
+        final Handler handler = new Handler();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<Word> words = AppDatabase.getInstance(getApplicationContext()).wordDao().getAllInLength(4);
-                Log.i("LOG", "got words ".concat(words.get(0).getName()));
+                EditText wordsLengthInput = findViewById(R.id.wordsLength);
+                Integer wordsLength = Integer.parseInt(wordsLengthInput.getText().toString(), 10);
+                final List<Word> words = AppDatabase.getInstance(getApplicationContext()).wordDao().getAllInLength(wordsLength);
+
+                if(words.size() > 0) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            String resultsString = "";
+                            for(Word word : words) {
+                                resultsString += resultsString.concat(word.getName().concat("\n"));
+                            }
+                            results.setText(resultsString);
+                        }
+                    });
+
+                }
             }
         }).start();
 
